@@ -2517,23 +2517,18 @@ package.json
     "node": "16.x"
   }
 "scripts":{
-    "build-client": "cd client && npm run build",
+  "install-dependencies": "npm run install-client && npm install",
+    "setup-production": "npm run install-client && npm run build-client && npm install",
     "install-client": "cd client && npm install",
-    "heroku-postbuild": "npm run install-client && npm run build-client",
+    "build-client": "cd client && npm run build",
+    "server": "nodemon server --ignore client",
+    "client": "npm start --prefix client",
+    "start": "concurrently --kill-others-on-fail \" npm run server\" \" npm run client\""
 }
-```
-
-```js
-Procfile
-
-web: node server.js
 ```
 
 - rm -rf .git
 - git init
 - git add .
 - git commit -m "first commit"
-- heroku create nameOfTheApp
-- git remote -v
-- add env variables
-- git push heroku main/master
+- ...rest of git commands to upload to github
